@@ -42,21 +42,22 @@ import java.util.concurrent.CountDownLatch;
  * A servlet that can be used to dispatch requests to elasticsearch. A {@link Node} will be started, reading
  * config from either <tt>/WEB-INF/elasticsearch.json</tt> or <tt>/WEB-INF/elasticsearch.yml</tt> but, by defualt,
  * with its internal HTTP interface disabled.
- *
+ * <p/>
  * <p>The node is registered as a servlet context attribute under <tt>elasticsearchNode</tt> so its easily
  * accessible from other web resources if needed.
- *
+ * <p/>
  * <p>The servlet can be registered under a prefix URI, and it will automatically adjust to handle it.
  */
 public class NodeServlet extends HttpServlet {
 
     public static String NODE_KEY = "elasticsearchNode";
 
-    private Node node;
+    protected Node node;
 
-    private RestController restController;
+    protected RestController restController;
 
-    @Override public void init() throws ServletException {
+    @Override
+    public void init() throws ServletException {
         getServletContext().log("Initializing elasticsearch Node '" + getServletName() + "'");
         ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
 
@@ -88,14 +89,16 @@ public class NodeServlet extends HttpServlet {
         getServletContext().setAttribute(NODE_KEY, node);
     }
 
-    @Override public void destroy() {
+    @Override
+    public void destroy() {
         if (node != null) {
             getServletContext().removeAttribute(NODE_KEY);
             node.close();
         }
     }
 
-    @Override protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletRestRequest request = new ServletRestRequest(req);
         ServletRestChannel channel = new ServletRestChannel(request, resp);
         try {
@@ -129,7 +132,8 @@ public class NodeServlet extends HttpServlet {
             this.latch = new CountDownLatch(1);
         }
 
-        @Override public void sendResponse(RestResponse response) {
+        @Override
+        public void sendResponse(RestResponse response) {
             resp.setContentType(response.contentType());
             if (RestUtils.isBrowser(restRequest.header("User-Agent"))) {
                 resp.addHeader("Access-Control-Allow-Origin", "*");
