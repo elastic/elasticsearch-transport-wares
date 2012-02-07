@@ -102,12 +102,8 @@ public class NodeServlet extends HttpServlet {
         ServletRestRequest request = new ServletRestRequest(req);
         ServletRestChannel channel = new ServletRestChannel(request, resp);
         try {
-            if (!restController.dispatchRequest(request, channel)) {
-                throw new ServletException("No mapping found for [" + request.uri() + "]");
-            }
+            restController.dispatchRequest(request, channel);
             channel.latch.await();
-        } catch (ServletException e) {
-            throw e;
         } catch (Exception e) {
             throw new IOException("failed to dispatch request", e);
         }

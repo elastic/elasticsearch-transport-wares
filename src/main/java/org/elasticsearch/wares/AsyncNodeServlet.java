@@ -53,11 +53,7 @@ public class AsyncNodeServlet extends NodeServlet {
         final AsyncContext asyncContext = req.startAsync();
         ServletRestRequest request = new ServletRestRequest(req);
         AsyncServletRestChannel channel = new AsyncServletRestChannel(request, asyncContext);
-        if (!restController.dispatchRequest(request, channel)) {
-            // TODO can we do this on the same service?
-            ((HttpServletResponse) asyncContext.getResponse()).sendError(400, "No mapping found for [" + request.uri() + "]");
-            asyncContext.complete();
-        }
+        restController.dispatchRequest(request, channel);
     }
 
     static class AsyncServletRestChannel implements RestChannel {
