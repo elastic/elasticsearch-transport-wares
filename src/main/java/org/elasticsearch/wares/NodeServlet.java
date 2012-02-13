@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -51,6 +52,7 @@ import java.util.concurrent.CountDownLatch;
 public class NodeServlet extends HttpServlet {
 
     public static String NODE_KEY = "elasticsearchNode";
+    public static String NAME_PREFIX = "org.elasticsearch.";
 
     protected Node node;
 
@@ -80,6 +82,22 @@ public class NodeServlet extends HttpServlet {
                 // ignore
             }
         }
+
+        Enumeration<String> enumeration = getServletContext().getAttributeNames();
+
+        while (enumeration.hasMoreElements()) {
+            String key = enumeration.nextElement();
+
+            if (key.startsWith(NAME_PREFIX)) {
+                Object attribute = getServletContext().getAttribute(key);
+
+                if (attribute != null)
+                    attribute = attribute.toString();
+
+                settings.put(key.substring(NAME_PREFIX.length()), (String) attribute);
+            }
+        }
+
         if (settings.get("http.enabled") == null) {
             settings.put("http.enabled", false);
         }
