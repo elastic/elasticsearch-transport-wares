@@ -61,7 +61,7 @@ public class ServletRestRequest extends AbstractRestRequest implements org.elast
     @Override public String uri() {
         String queryString = servletRequest.getQueryString();
         if (queryString != null && !queryString.trim().isEmpty()) {
-          return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length()) + "?" + queryString;
+            return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length()) + "?" + queryString;
         }
         return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length());
     }

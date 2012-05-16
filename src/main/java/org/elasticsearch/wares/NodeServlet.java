@@ -165,10 +165,10 @@ public class NodeServlet extends HttpServlet {
             try {
                 int contentLength = response.contentLength();
                 if (response.prefixContent() != null) {
-                  contentLength += response.prefixContentLength();
+                    contentLength += response.prefixContentLength();
                 }
                 if (response.suffixContent() != null) {
-                  contentLength += response.suffixContentLength();
+                    contentLength += response.suffixContentLength();
                 }
 
                 resp.setContentLength(contentLength);
