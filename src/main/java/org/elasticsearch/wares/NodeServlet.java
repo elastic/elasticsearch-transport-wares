@@ -163,7 +163,14 @@ public class NodeServlet extends HttpServlet {
                 resp.addHeader("X-Opaque-Id", opaque);
             }
             try {
-                int contentLength = response.contentLength() + response.prefixContentLength() + response.suffixContentLength();
+                int contentLength = response.contentLength();
+                if (response.prefixContent() != null) {
+                  contentLength += response.prefixContentLength();
+                }
+                if (response.suffixContent() != null) {
+                  contentLength += response.suffixContentLength();
+                }
+
                 resp.setContentLength(contentLength);
 
                 ServletOutputStream out = resp.getOutputStream();
