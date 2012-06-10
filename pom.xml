@@ -36,9 +36,8 @@
 
     <repositories>
         <repository>
-            <id>spy</id>
-            <name>Spy Repository</name>
-            <url>http://files.couchbase.com/maven2/</url>
+            <id>sonatype</id>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
         </repository>
     </repositories>
 
