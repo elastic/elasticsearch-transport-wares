@@ -19,7 +19,8 @@
 
 package org.elasticsearch.wares;
 
-import org.elasticsearch.common.Unicode;
+import org.elasticsearch.common.bytes.BytesArray;
+import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.common.io.Streams;
 import org.elasticsearch.rest.support.AbstractRestRequest;
 import org.elasticsearch.rest.support.RestUtils;
@@ -54,11 +55,13 @@ public class ServletRestRequest extends AbstractRestRequest implements org.elast
         content = Streams.copyToByteArray(servletRequest.getInputStream());
     }
 
-    @Override public Method method() {
+    @Override
+    public Method method() {
         return this.method;
     }
 
-    @Override public String uri() {
+    @Override
+    public String uri() {
         String queryString = servletRequest.getQueryString();
         if (queryString != null && !queryString.trim().isEmpty()) {
             return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length()) + "?" + queryString;
@@ -66,51 +69,48 @@ public class ServletRestRequest extends AbstractRestRequest implements org.elast
         return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length());
     }
 
-    @Override public String rawPath() {
+    @Override
+    public String rawPath() {
         return servletRequest.getRequestURI().substring(servletRequest.getContextPath().length() + servletRequest.getServletPath().length());
     }
 
-    @Override public boolean hasContent() {
+    @Override
+    public boolean hasContent() {
         return content.length > 0;
     }
 
-    @Override public boolean contentUnsafe() {
+    @Override
+    public boolean contentUnsafe() {
         return false;
     }
 
-    @Override public byte[] contentByteArray() {
-        return content;
+    @Override
+    public BytesReference content() {
+        return new BytesArray(content);
     }
 
-    @Override public int contentByteArrayOffset() {
-        return 0;
-    }
-
-    @Override public int contentLength() {
-        return content.length;
-    }
-
-    @Override public String contentAsString() {
-        return Unicode.fromBytes(contentByteArray(), contentByteArrayOffset(), contentLength());
-    }
-
-    @Override public String header(String name) {
+    @Override
+    public String header(String name) {
         return servletRequest.getHeader(name);
     }
 
-    @Override public Map<String, String> params() {
+    @Override
+    public Map<String, String> params() {
         return params;
     }
 
-    @Override public boolean hasParam(String key) {
+    @Override
+    public boolean hasParam(String key) {
         return params.containsKey(key);
     }
 
-    @Override public String param(String key) {
+    @Override
+    public String param(String key) {
         return params.get(key);
     }
 
-    @Override public String param(String key, String defaultValue) {
+    @Override
+    public String param(String key, String defaultValue) {
         String value = params.get(key);
         if (value == null) {
             return defaultValue;
