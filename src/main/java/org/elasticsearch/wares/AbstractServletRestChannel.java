@@ -43,6 +43,7 @@ abstract class AbstractServletRestChannel implements RestChannel {
     @Override
     public void sendResponse(RestResponse response) {
         HttpServletResponse resp = getServletResponse();
+        resp.setStatus(response.status().getStatus());
         resp.setContentType(response.contentType());
         if (RestUtils.isBrowser(restRequest.header("User-Agent"))) {
             resp.addHeader("Access-Control-Allow-Origin", "*");
