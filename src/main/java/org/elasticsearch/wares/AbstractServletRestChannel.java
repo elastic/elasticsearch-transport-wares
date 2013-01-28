@@ -92,6 +92,7 @@ abstract class AbstractServletRestChannel implements RestChannel {
 
     /**
      * Is invoked if an error occurs.
+     *
      * @param e the exception caught in {@link #sendResponse}.
      */
     protected abstract void errorOccured(IOException e);
