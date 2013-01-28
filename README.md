@@ -7,7 +7,9 @@ but instead use the jar file in addition to elasticsearch itself in your web app
     ------------------------------------------------
     | Servlet Transport Plugin  | ElasticSearch    |
     ------------------------------------------------
-    | master                    | 0.19 -> master   |
+    | master                    | 0.19.9 -> master |
+    ------------------------------------------------
+    | 1.5.0                     | 0.19.9 -> master |
     ------------------------------------------------
     | 1.4.0                     | 0.19.9 -> master |
     ------------------------------------------------
