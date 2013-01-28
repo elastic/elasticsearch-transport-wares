@@ -19,14 +19,10 @@
 
 package org.elasticsearch.wares;
 
-import org.elasticsearch.rest.RestChannel;
 import org.elasticsearch.rest.RestRequest;
-import org.elasticsearch.rest.RestResponse;
-import org.elasticsearch.rest.support.RestUtils;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -56,58 +52,28 @@ public class AsyncNodeServlet extends NodeServlet {
         restController.dispatchRequest(request, channel);
     }
 
-    static class AsyncServletRestChannel implements RestChannel {
-
-        final RestRequest restRequest;
+    static class AsyncServletRestChannel extends AbstractServletRestChannel {
 
         final AsyncContext asyncContext;
 
         AsyncServletRestChannel(RestRequest restRequest, AsyncContext asyncContext) {
-            this.restRequest = restRequest;
+            super(restRequest);
             this.asyncContext = asyncContext;
         }
 
         @Override
-        public void sendResponse(RestResponse response) {
-            HttpServletResponse resp = (HttpServletResponse) asyncContext.getResponse();
-            resp.setContentType(response.contentType());
-            if (RestUtils.isBrowser(restRequest.header("User-Agent"))) {
-                resp.addHeader("Access-Control-Allow-Origin", "*");
-                if (restRequest.method() == RestRequest.Method.OPTIONS) {
-                    // also add more access control parameters
-                    resp.addHeader("Access-Control-Max-Age", "1728000");
-                    resp.addHeader("Access-Control-Allow-Methods", "PUT, DELETE");
-                    resp.addHeader("Access-Control-Allow-Headers", "X-Requested-With");
-                }
-            }
-            String opaque = restRequest.header("X-Opaque-Id");
-            if (opaque != null) {
-                resp.addHeader("X-Opaque-Id", opaque);
-            }
-            try {
-                int contentLength = response.contentLength();
-                if (response.prefixContent() != null) {
-                    contentLength += response.prefixContentLength();
-                }
-                if (response.suffixContent() != null) {
-                    contentLength += response.suffixContentLength();
-                }
-                resp.setContentLength(contentLength);
+        protected HttpServletResponse getServletResponse() {
+            return (HttpServletResponse) asyncContext.getResponse();
+        }
 
-                ServletOutputStream out = resp.getOutputStream();
-                if (response.prefixContent() != null) {
-                    out.write(response.prefixContent(), 0, response.prefixContentLength());
-                }
-                out.write(response.content(), 0, response.contentLength());
-                if (response.suffixContent() != null) {
-                    out.write(response.suffixContent(), 0, response.suffixContentLength());
-                }
-                out.close();
-            } catch (IOException e) {
-                resp.setStatus(500);
-            } finally {
-                asyncContext.complete();
-            }
+        @Override
+        protected void errorOccured(IOException e) {
+            getServletResponse().setStatus(500);
+        }
+
+        @Override
+        protected void finish() {
+            asyncContext.complete();
         }
     }
 }
