@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Base implementation of RestChannel responsible for mappig a
+ * Base implementation of RestChannel responsible for mapping a
  * RestResponse to an HttpServletResponse.
  */
 abstract class AbstractServletRestChannel implements RestChannel {

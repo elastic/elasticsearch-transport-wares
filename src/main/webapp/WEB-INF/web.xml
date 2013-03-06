@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>Elasticsearch web application</display-name>
+    <description>Elasticsearch web application</description>
+    <distributable/>
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+    <filter>
+        <filter-name>RequestCharacterEncodingFilter</filter-name>
+        <filter-class>org.elasticsearch.wares.filter.RequestCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>SanitizeCharacterFilter</filter-name>
+        <filter-class>org.elasticsearch.wares.filter.SanitizeCharacterFilter</filter-class>
+        <init-param>
+            <param-name>parameternames</param-name>
+            <param-value>q</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>compressionFilter</filter-name>
+        <filter-class>org.elasticsearch.wares.filter.CompressionFilter</filter-class>
+        <init-param>
+            <param-name>compressionThreshold</param-name>
+            <param-value>1024</param-value>
+            <!-- compress anything above 1kb -->
+        </init-param>
+        <init-param>
+            <param-name>ignoreURLPattern</param-name>
+            <param-value>.*\.(flv|mp3|mpg)</param-value>
+            <!-- regex -->
+        </init-param>
+        <init-param>
+            <param-name>ignoreMimes</param-name>
+            <param-value>images/*,video/*, multipart/x-gzip</param-value>
+            <!-- ignore -->
+        </init-param>
+        <init-param>
+            <param-name>ignoreUserAgentsPattern</param-name>
+            <param-value>.*MSIE.*</param-value>
+            <!-- regex -->
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestCharacterEncodingFilter</filter-name>
+        <servlet-name>*</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>compressionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <display-name>ElasticsearchServlet</display-name>
+        <servlet-name>ElasticsearchServlet</servlet-name>
+        <servlet-class>org.elasticsearch.wares.NodeServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ElasticsearchServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+</web-app>
