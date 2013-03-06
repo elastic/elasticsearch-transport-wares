@@ -19,7 +19,11 @@
 
 package org.elasticsearch.wares;
 
+import org.elasticsearch.common.logging.ESLogger;
+import org.elasticsearch.common.logging.Loggers;
+import org.elasticsearch.common.logging.log4j.LogConfigurator;
 import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.node.internal.InternalNode;
@@ -37,7 +41,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * A servlet that can be used to dispatch requests to elasticsearch. A {@link Node} will be started, reading
- * config from either <tt>/WEB-INF/elasticsearch.json</tt> or <tt>/WEB-INF/elasticsearch.yml</tt> but, by defualt,
+ * config from either <tt>/WEB-INF/config/elasticsearch.json</tt> or <tt>/WEB-INF/config/elasticsearch.yml</tt> but, by default,
  * with its internal HTTP interface disabled.
  * <p/>
  * <p>The node is registered as a servlet context attribute under <tt>elasticsearchNode</tt> so its easily
@@ -46,6 +50,10 @@ import java.util.concurrent.CountDownLatch;
  * <p>The servlet can be registered under a prefix URI, and it will automatically adjust to handle it.
  */
 public class NodeServlet extends HttpServlet {
+
+    private static final ESLogger logger = Loggers.getLogger(NodeServlet.class);
+
+    private final static String CONFIG_PATH = "/WEB-INF/config/";
 
     public static String NODE_KEY = "elasticsearchNode";
     public static String NAME_PREFIX = "org.elasticsearch.";
@@ -56,26 +64,27 @@ public class NodeServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+
         getServletContext().log("Initializing elasticsearch Node '" + getServletName() + "'");
         ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
 
-        InputStream resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.json");
+        InputStream resourceAsStream = getServletContext().getResourceAsStream(CONFIG_PATH + "/elasticsearch.json");
         if (resourceAsStream != null) {
-            settings.loadFromStream("/WEB-INF/elasticsearch.json", resourceAsStream);
+            settings.loadFromStream(CONFIG_PATH + "elasticsearch.json", resourceAsStream);
             try {
                 resourceAsStream.close();
             } catch (IOException e) {
-                // ignore
+                logger.error(e.getMessage(), e);
             }
         }
 
-        resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.yml");
+        resourceAsStream = getServletContext().getResourceAsStream(CONFIG_PATH + "elasticsearch.yml");
         if (resourceAsStream != null) {
-            settings.loadFromStream("/WEB-INF/elasticsearch.yml", resourceAsStream);
+            settings.loadFromStream(CONFIG_PATH + "elasticsearch.yml", resourceAsStream);
             try {
                 resourceAsStream.close();
             } catch (IOException e) {
-                // ignore
+                logger.error(e.getMessage(), e);
             }
         }
 
@@ -98,7 +107,15 @@ public class NodeServlet extends HttpServlet {
             settings.put("http.enabled", false);
         }
 
-        node = NodeBuilder.nodeBuilder().settings(settings).node();
+        Settings finalSettings = settings.build();
+        try {
+            finalSettings.getClassLoader().loadClass("org.apache.log4j.Logger");
+            LogConfigurator.configure(finalSettings);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        node = NodeBuilder.nodeBuilder().settings(finalSettings).node();
         restController = ((InternalNode) node).injector().getInstance(RestController.class);
         getServletContext().setAttribute(NODE_KEY, node);
     }

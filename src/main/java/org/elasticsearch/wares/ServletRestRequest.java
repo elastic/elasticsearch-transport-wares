@@ -22,6 +22,7 @@ package org.elasticsearch.wares;
 import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.common.io.Streams;
+import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.support.AbstractRestRequest;
 import org.elasticsearch.rest.support.RestUtils;
 
@@ -33,7 +34,7 @@ import java.util.Map;
 /**
  *
  */
-public class ServletRestRequest extends AbstractRestRequest implements org.elasticsearch.rest.RestRequest {
+public class ServletRestRequest extends AbstractRestRequest implements RestRequest {
 
     private final HttpServletRequest servletRequest;
 
