@@ -37,10 +37,10 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * A servlet that can be used to dispatch requests to elasticsearch. A {@link Node} will be started, reading
- * config from either <tt>/WEB-INF/elasticsearch.json</tt> or <tt>/WEB-INF/elasticsearch.yml</tt> but, by defualt,
+ * config from either <tt>/WEB-INF/elasticsearch.json</tt> or <tt>/WEB-INF/elasticsearch.yml</tt> but, by default,
  * with its internal HTTP interface disabled.
  * <p/>
- * <p>The node is registered as a servlet context attribute under <tt>elasticsearchNode</tt> so its easily
+ * <p>The node is registered as a servlet context attribute under <tt>elasticsearchNode</tt> so it's easily
  * accessible from other web resources if needed.
  * <p/>
  * <p>The servlet can be registered under a prefix URI, and it will automatically adjust to handle it.
