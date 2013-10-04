@@ -24,6 +24,22 @@ but instead use the jar file in addition to elasticsearch itself in your web app
     | 1.0.0                     | 0.18             |
     ------------------------------------------------
 
+Tomcat configuration (CORS filter)
+----------------------------------
+
+The [Tomcat configuration](http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#CORS_Filter) to allow CORS is:
+
+```xml
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
 License
 -------
 
