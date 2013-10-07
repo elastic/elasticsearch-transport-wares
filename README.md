@@ -4,25 +4,63 @@ Servlet Transport for ElasticSearch
 The wares transport plugin allows to use the REST interface over servlets. You don't really install this plugin,
 but instead use the jar file in addition to elasticsearch itself in your web app using the maven repo.
 
-    ------------------------------------------------
-    | Servlet Transport Plugin  | ElasticSearch    |
-    ------------------------------------------------
-    | master                    | 0.90   -> master |
-    ------------------------------------------------
-    | 1.6.0                     | 0.90   -> master |
-    ------------------------------------------------
-    | 1.5.0                     | 0.19.9 -> master |
-    ------------------------------------------------
-    | 1.4.0                     | 0.19.9 -> master |
-    ------------------------------------------------
-    | 1.3.0                     | 0.19.0 -> 0.19.8 |
-    ------------------------------------------------
-    | 1.2.0                     | 0.19 -> master   |
-    ------------------------------------------------
-    | 1.1.0                     | 0.19 -> master   |
-    ------------------------------------------------
-    | 1.0.0                     | 0.18             |
-    ------------------------------------------------
+<table>
+	<thead>
+		<tr>
+			<td>Servlet Transport Plugin</td>
+			<td>ElasticSearch</td>
+			<td>Release date</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>master (1.8.0-SNAPSHOT)</td>
+			<td>0.90 -> master</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>1.7.0</td>
+			<td>0.90 -> master</td>
+			<td>07/10/2013</td>
+		</tr>
+		<tr>
+			<td>1.6.0</td>
+			<td>0.90 -> master</td>
+			<td>26/02/2013</td>
+		</tr>
+		<tr>
+			<td>1.5.0</td>
+			<td>0.19.9 -> 0.90</td>
+			<td>28/01/2013</td>
+		</tr>
+		<tr>
+			<td>1.4.0</td>
+			<td>0.19.9 -> 0.90</td>
+			<td>23/08/2012</td>
+		</tr>
+		<tr>
+			<td>1.3.0</td>
+			<td>0.19.0 -> 0.19.8</td>
+			<td>16/05/2012</td>
+		</tr>
+		<tr>
+			<td>1.2.0</td>
+			<td>0.19.0 -> 0.19.8</td>
+			<td>13/02/2012</td>
+		</tr>
+		<tr>
+			<td>1.1.0</td>
+			<td>0.19.0 -> 0.19.8</td>
+			<td>07/02/2012</td>
+		</tr>
+		<tr>
+			<td>1.0.0</td>
+			<td>0.18</td>
+			<td>05/12/2011</td>
+		</tr>
+	</tbody>
+</table>
+
 
 Tomcat configuration (CORS filter)
 ----------------------------------
