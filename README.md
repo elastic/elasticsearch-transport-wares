@@ -14,6 +14,7 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
+| 2.0.0.RC1-SNAPSHOT (master) | 1.0.0.RC1 -> master   |              |
 | 1.9.0-SNAPSHOT (master)     | 0.90.10 -> 0.90       |              |
 | 1.8.0                       | 0.90.10 -> 0.90       |  2014-01-13  |
 | 1.7.0                       | 0.90.0 -> 0.90.9      |  2013-10-07  |
