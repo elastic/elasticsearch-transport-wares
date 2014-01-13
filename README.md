@@ -2,11 +2,20 @@ Servlet Transport for Elasticsearch
 ==================================
 
 The wares transport plugin allows to use the REST interface over servlets. You don't really install this plugin,
-but instead use the jar file in addition to elasticsearch itself in your web app using the maven repo.
+but instead use the jar file in addition to elasticsearch itself in your web app using the maven repo:
+
+```xml
+<dependency>
+    <groupId>org.elasticsearch</groupId>
+    <artifactId>elasticsearch-transport-wares</artifactId>
+    <version>1.8.0</version>
+</dependency>
+```
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
-| 1.8.0-SNAPSHOT (master)     | 0.90.10 -> 0.90       |              |
+| 1.9.0-SNAPSHOT (master)     | 0.90.10 -> 0.90       |              |
+| 1.8.0                       | 0.90.10 -> 0.90       |  2014-01-13  |
 | 1.7.0                       | 0.90.0 -> 0.90.9      |  2013-10-07  |
 | 1.6.0                       | 0.90.0 -> 0.90.9      |  2013-02-26  |
 | 1.5.0                       | 0.19.9 -> 0.20        |  2013-01-28  |
