@@ -8,22 +8,21 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 <dependency>
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>2.0.0.RC1</version>
+    <version>2.2.0-SNAPSHOT</version>
 </dependency>
 ```
 
 * For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/master).
+* For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.2).
 * For 0.90.x elasticsearch versions, look at [es-0.90 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-0.90).
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
-| 2.0.0-SNAPSHOT              | 1.0.0.RC1 -> master   |  XXXX-XX-XX  |
-| 2.0.0.RC1                   | 1.0.0.RC1 -> master   |  2014-10-15  |
+| 2.2.0-SNAPSHOT              | 1.2.1 -> 1.2          |  XXXX-XX-XX  |
 
 Please read documentation relative to the version you are using:
 
-* [2.0.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/master/README.md)
-* [2.0.0.RC1](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/v2.2.0.RC1/README.md)
+* [2.2.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/es-1.2/README.md)
 
 Tomcat configuration (CORS filter)
 ----------------------------------
