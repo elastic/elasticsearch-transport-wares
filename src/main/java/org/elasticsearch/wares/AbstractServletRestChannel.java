@@ -33,11 +33,8 @@ import java.io.IOException;
  */
 abstract class AbstractServletRestChannel extends RestChannel {
 
-    final RestRequest restRequest;
-
-    protected AbstractServletRestChannel(RestRequest restRequest) {
-        super(restRequest);
-        this.restRequest = restRequest;
+    protected AbstractServletRestChannel(RestRequest request) {
+        super(request);
     }
 
     @Override
@@ -45,7 +42,7 @@ abstract class AbstractServletRestChannel extends RestChannel {
         HttpServletResponse resp = getServletResponse();
         resp.setStatus(response.status().getStatus());
         resp.setContentType(response.contentType());
-        String opaque = restRequest.header("X-Opaque-Id");
+        String opaque = request.header("X-Opaque-Id");
         if (opaque != null) {
             resp.addHeader("X-Opaque-Id", opaque);
         }
