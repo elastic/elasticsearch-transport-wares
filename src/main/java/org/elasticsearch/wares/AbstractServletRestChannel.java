@@ -31,11 +31,12 @@ import java.io.IOException;
  * Base implementation of RestChannel responsible for mapping a
  * RestResponse to an HttpServletResponse.
  */
-abstract class AbstractServletRestChannel implements RestChannel {
+abstract class AbstractServletRestChannel extends RestChannel {
 
     final RestRequest restRequest;
 
     protected AbstractServletRestChannel(RestRequest restRequest) {
+        super(restRequest);
         this.restRequest = restRequest;
     }
 
@@ -49,24 +50,9 @@ abstract class AbstractServletRestChannel implements RestChannel {
             resp.addHeader("X-Opaque-Id", opaque);
         }
         try {
-            int contentLength = response.contentLength();
-            if (response.prefixContent() != null) {
-                contentLength += response.prefixContentLength();
-            }
-            if (response.suffixContent() != null) {
-                contentLength += response.suffixContentLength();
-            }
-
-            resp.setContentLength(contentLength);
-
+            resp.setContentLength(response.content().length());
             ServletOutputStream out = resp.getOutputStream();
-            if (response.prefixContent() != null) {
-                out.write(response.prefixContent(), 0, response.prefixContentLength());
-            }
-            out.write(response.content(), 0, response.contentLength());
-            if (response.suffixContent() != null) {
-                out.write(response.suffixContent(), 0, response.suffixContentLength());
-            }
+            response.content().writeTo(out);
             out.close();
         } catch (IOException e) {
             errorOccured(e);
