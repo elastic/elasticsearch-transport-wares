@@ -18,10 +18,12 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
+| 2.2.1-SNAPSHOT              | 1.2.1 -> 1.2          |  XXXX-XX-XX  |
 | 2.2.0                       | 1.2.1 -> 1.2          |  2014-07-02  |
 
 Please read documentation relative to the version you are using:
 
+* [2.2.1-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/es-1.2/README.md)
 * [2.2.0](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/v2.2.0/README.md)
 
 Tomcat configuration (CORS filter)
