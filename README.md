@@ -8,7 +8,7 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 <dependency>
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -20,11 +20,11 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
-| 2.3.0-SNAPSHOT              | 1.3                   |  XXXX-XX-XX  |
+| 3.0.0-SNAPSHOT              | 2.0                   |  XXXX-XX-XX  |
 
 Please read documentation relative to the version you are using:
 
-* [2.3.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/es-1.3/README.md)
+* [3.0.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/master/README.md)
 
 Tomcat configuration (CORS filter)
 ----------------------------------
