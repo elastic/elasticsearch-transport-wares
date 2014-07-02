@@ -42,6 +42,14 @@ The [Tomcat configuration](http://tomcat.apache.org/tomcat-7.0-doc/config/filter
 </filter-mapping>
 ```
 
+Node resource
+-------------
+
+The node is registered as a servlet context attribute under `elasticsearchNode` so it is easily accessible from other web resources if needed.
+
+You can also preregister your own node using `elasticsearchNode` servlet context attribute. It will be used by the NodeServlet.
+
+
 License
 -------
 
