@@ -56,51 +56,62 @@ public class NodeServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        getServletContext().log("Initializing elasticsearch Node '" + getServletName() + "'");
-        ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
-
-        InputStream resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.json");
-        if (resourceAsStream != null) {
-            settings.loadFromStream("/WEB-INF/elasticsearch.json", resourceAsStream);
-            try {
-                resourceAsStream.close();
-            } catch (IOException e) {
-                // ignore
+        final Object nodeAttribute = getServletContext().getAttribute(NODE_KEY);
+        if (nodeAttribute == null || !(nodeAttribute instanceof InternalNode)) {
+            if (nodeAttribute != null) {
+                getServletContext().log(
+                        "Warning: overwriting attribute with key \"" + NODE_KEY + "\" and type \""
+                                + nodeAttribute.getClass().getName() + "\".");
             }
-        }
-
-        resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.yml");
-        if (resourceAsStream != null) {
-            settings.loadFromStream("/WEB-INF/elasticsearch.yml", resourceAsStream);
-            try {
-                resourceAsStream.close();
-            } catch (IOException e) {
-                // ignore
+            getServletContext().log("Initializing elasticsearch Node '" + getServletName() + "'");
+            ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
+    
+            InputStream resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.json");
+            if (resourceAsStream != null) {
+                settings.loadFromStream("/WEB-INF/elasticsearch.json", resourceAsStream);
+                try {
+                    resourceAsStream.close();
+                } catch (IOException e) {
+                    // ignore
+                }
             }
-        }
-
-        Enumeration<String> enumeration = getServletContext().getAttributeNames();
-
-        while (enumeration.hasMoreElements()) {
-            String key = enumeration.nextElement();
-
-            if (key.startsWith(NAME_PREFIX)) {
-                Object attribute = getServletContext().getAttribute(key);
-
-                if (attribute != null)
-                    attribute = attribute.toString();
-
-                settings.put(key.substring(NAME_PREFIX.length()), (String) attribute);
+    
+            resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.yml");
+            if (resourceAsStream != null) {
+                settings.loadFromStream("/WEB-INF/elasticsearch.yml", resourceAsStream);
+                try {
+                    resourceAsStream.close();
+                } catch (IOException e) {
+                    // ignore
+                }
             }
+    
+            Enumeration<String> enumeration = getServletContext().getAttributeNames();
+    
+            while (enumeration.hasMoreElements()) {
+                String key = enumeration.nextElement();
+    
+                if (key.startsWith(NAME_PREFIX)) {
+                    Object attribute = getServletContext().getAttribute(key);
+    
+                    if (attribute != null)
+                        attribute = attribute.toString();
+    
+                    settings.put(key.substring(NAME_PREFIX.length()), (String) attribute);
+                }
+            }
+    
+            if (settings.get("http.enabled") == null) {
+                settings.put("http.enabled", false);
+            }
+    
+            node = NodeBuilder.nodeBuilder().settings(settings).node();
+            getServletContext().setAttribute(NODE_KEY, node);
+        } else {
+            getServletContext().log("Using pre-initialized elasticsearch Node '" + getServletName() + "'");
+            this.node = (InternalNode) nodeAttribute;
         }
-
-        if (settings.get("http.enabled") == null) {
-            settings.put("http.enabled", false);
-        }
-
-        node = NodeBuilder.nodeBuilder().settings(settings).node();
         restController = ((InternalNode) node).injector().getInstance(RestController.class);
-        getServletContext().setAttribute(NODE_KEY, node);
     }
 
     @Override
