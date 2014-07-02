@@ -2,13 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <name>elasticsearch-transport-wares</name>
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <description>Servlet transport for ElasticSearch</description>
+    <name>Elasticsearch Servlet Transport plugin</name>
+    <description>The wares transport plugin allows to use the REST interface over servlets.</description>
+    <url>https://github.com/elasticsearch/elasticsearch-transport-wares/</url>
     <inceptionYear>2009</inceptionYear>
     <licenses>
         <license>
@@ -33,13 +35,6 @@
     <properties>
         <elasticsearch.version>1.0.0.RC1</elasticsearch.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>sonatype</id>
-            <url>http://oss.sonatype.org/content/repositories/releases/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

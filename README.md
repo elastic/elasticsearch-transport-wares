@@ -8,25 +8,22 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 <dependency>
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>1.8.0</version>
+    <version>2.0.0.RC1</version>
 </dependency>
 ```
 
+* For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/master).
+* For 0.90.x elasticsearch versions, look at [es-0.90 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-0.90).
+
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
-| 2.0.0-SNAPSHOT (master)     | 1.0.0.RC1 -> master   |              |
+| 2.0.0-SNAPSHOT              | 1.0.0.RC1 -> master   |  XXXX-XX-XX  |
 | 2.0.0.RC1                   | 1.0.0.RC1 -> master   |  2014-10-15  |
-| 1.9.0-SNAPSHOT (master)     | 0.90.10 -> 0.90       |              |
-| 1.8.0                       | 0.90.10 -> 0.90       |  2014-01-13  |
-| 1.7.0                       | 0.90.0 -> 0.90.9      |  2013-10-07  |
-| 1.6.0                       | 0.90.0 -> 0.90.9      |  2013-02-26  |
-| 1.5.0                       | 0.19.9 -> 0.20        |  2013-01-28  |
-| 1.4.0                       | 0.19.9 -> 0.20        |  2012-08-23  |
-| 1.3.0                       | 0.19.0 -> 0.19.8      |  2012-05-16  |
-| 1.2.0                       | 0.19.0 -> 0.19.8      |  2012-02-13  |
-| 1.1.0                       | 0.19.0 -> 0.19.8      |  2012-02-07  |
-| 1.0.0                       | 0.18                  |  2011-12-05  |
 
+Please read documentation relative to the version you are using:
+
+* [2.0.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/master/README.md)
+* [2.0.0.RC1](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/v2.2.0.RC1/README.md)
 
 Tomcat configuration (CORS filter)
 ----------------------------------
