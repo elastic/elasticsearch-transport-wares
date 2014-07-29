@@ -8,7 +8,7 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 <dependency>
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
 </dependency>
 ```
 
