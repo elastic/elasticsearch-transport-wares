@@ -14,17 +14,18 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 
 * For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/master).
 * For 1.x.x elasticsearch versions, look at [es-1.x branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.x).
+* For 1.4.x elasticsearch versions, look at [es-1.4 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.4).
 * For 1.3.x elasticsearch versions, look at [es-1.3 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.3).
 * For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.2).
 * For 0.90.x elasticsearch versions, look at [es-0.90 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-0.90).
 
 |   Wares Transport Plugin    | elasticsearch         | Release date |
 |-----------------------------|-----------------------|:------------:|
-| 2.4.0-SNAPSHOT              | 1.x                   |  XXXX-XX-XX  |
+| 2.5.0-SNAPSHOT              | 1.x                   |  XXXX-XX-XX  |
 
 Please read documentation relative to the version you are using:
 
-* [2.4.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/es-1.x/README.md)
+* [2.5.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/es-1.x/README.md)
 
 Tomcat configuration (CORS filter)
 ----------------------------------
