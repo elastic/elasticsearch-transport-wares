@@ -6,7 +6,7 @@
 
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>2.4.0</version>
+    <version>2.4.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Elasticsearch Servlet Transport plugin</name>
     <description>The wares transport plugin allows to use the REST interface over servlets.</description>
