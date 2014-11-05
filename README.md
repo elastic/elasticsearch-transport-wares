@@ -14,7 +14,7 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 
 * For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/master).
 * For 1.x.x elasticsearch versions, look at [es-1.x branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.x).
-|    es-1.4              |     2.4.0         | [2.4.0](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/v2.4.0/#version-240-for-elasticsearch-14)                  |
+|    es-1.4              |     2.4.1         | [2.4.1](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/v2.4.1/#version-241-for-elasticsearch-14)                  |
 * For 1.3.x elasticsearch versions, look at [es-1.3 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.3).
 * For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.2).
 * For 1.0.x elasticsearch versions, look at [es-1.0 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.0).
