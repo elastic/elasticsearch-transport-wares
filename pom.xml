@@ -33,7 +33,8 @@
     </parent>
 
     <properties>
-        <elasticsearch.version>1.4.0.Beta1</elasticsearch.version>
+        <elasticsearch.version>1.4.0</elasticsearch.version>
+        <elasticsearch.version>1.4.0</elasticsearch.version>
     </properties>
 
     <dependencies>
