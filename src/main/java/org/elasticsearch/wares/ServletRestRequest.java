@@ -23,6 +23,7 @@ import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.common.collect.ImmutableList;
 import org.elasticsearch.common.io.Streams;
+import org.elasticsearch.common.io.stream.BytesStreamOutput;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.support.RestUtils;
 
@@ -48,13 +49,15 @@ public class ServletRestRequest extends RestRequest {
     public ServletRestRequest(HttpServletRequest servletRequest) throws IOException {
         this.servletRequest = servletRequest;
         this.method = Method.valueOf(servletRequest.getMethod());
-        this.params = new HashMap<String, String>();
+        this.params = new HashMap<>();
 
         if (servletRequest.getQueryString() != null) {
             RestUtils.decodeQueryString(servletRequest.getQueryString(), 0, params);
         }
 
-        content = Streams.copyToByteArray(servletRequest.getInputStream());
+        BytesStreamOutput out = new BytesStreamOutput();
+        Streams.copy(servletRequest.getInputStream(), out);
+        content = out.bytes().toBytes();
     }
 
     @Override
