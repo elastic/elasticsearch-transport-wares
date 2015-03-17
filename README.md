@@ -8,25 +8,21 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 <dependency>
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-transport-wares</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>2.4.1</version>
 </dependency>
 ```
 
-* For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/master).
-* For 1.x.x elasticsearch versions, look at [es-1.x branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.x).
-|    es-1.4              |     2.4.1         | [2.4.1](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/v2.4.1/#version-241-for-elasticsearch-14)                  |
-* For 1.3.x elasticsearch versions, look at [es-1.3 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.3).
-* For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.2).
-* For 1.0.x elasticsearch versions, look at [es-1.0 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-1.0).
-* For 0.90.x elasticsearch versions, look at [es-0.90 branch](https://github.com/elasticsearch/elasticsearch-transport-wares/tree/es-0.90).
+| elasticsearch | Wares Transport Plugin | Documentation                                                                           |
+|---------------|------------------------|-----------------------------------------------------------------------------------------|
+| master        |  Build from source     | See below                                                                               |
+| es-1.x        |  Build from source     | [2.6.0-SNAPSHOT](https://github.com/elastic/elasticsearch-transport-wares/tree/es-1.x/) |
+| es-1.5        |  Build from source     | [2.5.0-SNAPSHOT](https://github.com/elastic/elasticsearch-transport-wares/tree/es-1.5/) |
+| es-1.4        |     2.4.1              | [2.4.1](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.4.1/)          |
+| es-1.3        |     2.3.0              | [2.3.0](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.3.0/)          |
+| es-1.2        |     2.2.0              | [2.2.0](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.2.0/)          |
+| es-1.0        |     2.0.0.RC1          | [2.0.0.RC1](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.0.0.RC1/)  |
+| es-0.90       |     1.8.0              | [1.8.0](https://github.com/elastic/elasticsearch-transport-wares/tree/v1.8.0/)          |
 
-|   Wares Transport Plugin    | elasticsearch         | Release date |
-|-----------------------------|-----------------------|:------------:|
-| 3.0.0-SNAPSHOT              | 2.0                   |  XXXX-XX-XX  |
-
-Please read documentation relative to the version you are using:
-
-* [3.0.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-wares/blob/master/README.md)
 
 Tomcat configuration (CORS filter)
 ----------------------------------
