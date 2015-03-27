@@ -20,6 +20,7 @@
 package org.elasticsearch.wares;
 
 import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.http.netty.NettyHttpServerTransport;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.node.internal.InternalNode;
@@ -53,6 +54,8 @@ public class NodeServlet extends HttpServlet {
     protected Node node;
 
     protected RestController restController;
+    
+    protected boolean detailedErrorsEnabled;
 
     @Override
     public void init() throws ServletException {
@@ -111,7 +114,8 @@ public class NodeServlet extends HttpServlet {
             getServletContext().log("Using pre-initialized elasticsearch Node '" + getServletName() + "'");
             this.node = (InternalNode) nodeAttribute;
         }
-        restController = ((InternalNode) node).injector().getInstance(RestController.class);
+        restController = ((InternalNode) node).injector().getInstance(RestController.class);        
+        detailedErrorsEnabled = this.node.settings().getAsBoolean(NettyHttpServerTransport.SETTING_HTTP_DETAILED_ERRORS_ENABLED, true);
     }
 
     @Override
@@ -125,7 +129,7 @@ public class NodeServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletRestRequest request = new ServletRestRequest(req);
-        ServletRestChannel channel = new ServletRestChannel(request, resp);
+        ServletRestChannel channel = new ServletRestChannel(request, resp, this.detailedErrorsEnabled);
         try {
             restController.dispatchRequest(request, channel);
             channel.latch.await();
@@ -145,8 +149,8 @@ public class NodeServlet extends HttpServlet {
 
         IOException sendFailure;
 
-        ServletRestChannel(RestRequest restRequest, HttpServletResponse resp) {
-            super(restRequest);
+        ServletRestChannel(RestRequest restRequest, HttpServletResponse resp, boolean detailedErrorsEnabled) {
+            super(restRequest, detailedErrorsEnabled);
             this.resp = resp;
             this.latch = new CountDownLatch(1);
         }
