@@ -33,8 +33,8 @@ import java.io.IOException;
  */
 abstract class AbstractServletRestChannel extends RestChannel {
 
-    protected AbstractServletRestChannel(RestRequest request) {
-        super(request);
+    protected AbstractServletRestChannel(RestRequest request, boolean detailedErrorsEnabled) {
+        super(request, detailedErrorsEnabled);
     }
 
     @Override
