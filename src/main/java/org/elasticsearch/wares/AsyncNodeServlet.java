@@ -48,7 +48,8 @@ public class AsyncNodeServlet extends NodeServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final AsyncContext asyncContext = req.startAsync();
         ServletRestRequest request = new ServletRestRequest(req);
-        AsyncServletRestChannel channel = new AsyncServletRestChannel(request, asyncContext);
+        AsyncServletRestChannel channel = new AsyncServletRestChannel(request, asyncContext,
+                detailedErrorsEnabled);
         restController.dispatchRequest(request, channel);
     }
 
@@ -56,8 +57,8 @@ public class AsyncNodeServlet extends NodeServlet {
 
         final AsyncContext asyncContext;
 
-        AsyncServletRestChannel(RestRequest restRequest, AsyncContext asyncContext) {
-            super(restRequest);
+        AsyncServletRestChannel(RestRequest restRequest, AsyncContext asyncContext, boolean detailedErrorsEnabled) {
+            super(restRequest, detailedErrorsEnabled);
             this.asyncContext = asyncContext;
         }
 
