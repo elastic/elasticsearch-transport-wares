@@ -289,14 +289,27 @@ def find_release_version(src_branch):
                 return match.group(1)
         raise RuntimeError('Could not find release version in branch %s' % src_branch)
 
-# extract a value from pom.xml
-def find_from_pom(tag):
+# extract a value from pom.xml after a given line
+def find_from_pom(tag, first_line=None):
     with open(POM_FILE, encoding='utf-8') as file:
+        previous_line_matched = False
+        if first_line is None:
+            previous_line_matched = True
         for line in file:
-            match = re.search(r'<%s>(.+)</%s>' % (tag, tag), line)
-            if match:
-                return match.group(1)
-        raise RuntimeError('Could not find <%s> in pom.xml file' % (tag))
+            if previous_line_matched:
+                match = re.search(r'<%s>(.+)</%s>' % (tag, tag), line)
+                if match:
+                    return match.group(1)
+
+            if first_line is not None:
+                match = re.search(r'%s' % first_line, line)
+                if match:
+                    previous_line_matched = True
+
+        if first_line is not None:
+            raise RuntimeError('Could not find %s in pom.xml file after %s' % (tag, first_line))
+        else:
+            raise RuntimeError('Could not find %s in pom.xml file' % tag)
 
 def get_artifacts(artifact_id, release):
     artifact_path = ROOT_DIR + 'target/releases/%s-%s.zip' % (artifact_id, release)
@@ -626,7 +639,14 @@ if __name__ == '__main__':
     artifact_name = find_from_pom('name')
     artifact_description = find_from_pom('description')
     project_url = find_from_pom('url')
-    elasticsearch_version = find_from_pom('elasticsearch.version')
+
+    try:
+        elasticsearch_version = find_from_pom('elasticsearch.version')
+    except RuntimeError:
+        # With projects using elasticsearch-parent project, we need to consider elasticsearch version
+        # to be after <artifactId>elasticsearch-parent</artifactId>
+        elasticsearch_version = find_from_pom('version', '<artifactId>elasticsearch-parent</artifactId>')
+
     print('  Artifact Id: [%s]' % artifact_id)
     print('  Release version: [%s]' % release_version)
     print('  Elasticsearch: [%s]' % elasticsearch_version)
