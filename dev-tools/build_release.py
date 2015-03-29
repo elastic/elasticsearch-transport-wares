@@ -380,7 +380,7 @@ def get_github_repository(reponame,
     else:
         g = github3.GitHub()
 
-    return g.repository("elasticsearch", reponame)
+    return g.repository("elastic", reponame)
 
 # Check if there are some remaining open issues and fails
 def check_opened_issues(version, repository, reponame):
