@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Elasticsearch Servlet Transport plugin</name>
     <description>The wares transport plugin allows to use the REST interface over servlets.</description>
-    <url>https://github.com/elasticsearch/elasticsearch-transport-wares/</url>
+    <url>https://github.com/elastic/elasticsearch-transport-wares/</url>
     <inceptionYear>2009</inceptionYear>
     <licenses>
         <license>
@@ -20,10 +20,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git@github.com:elasticsearch/elasticsearch-transport-wares.git</connection>
-        <developerConnection>scm:git:git@github.com:elasticsearch/elasticsearch-transport-wares.git
-        </developerConnection>
-        <url>http://github.com/elasticsearch/elasticsearch-transport-wares</url>
+        <connection>scm:git:git@github.com:elastic/elasticsearch-transport-wares.git</connection>
+        <developerConnection>scm:git:git@github.com:elastic/elasticsearch-transport-wares.git</developerConnection>
+        <url>http://github.com/elastic/elasticsearch-transport-wares</url>
     </scm>
 
     <parent>
