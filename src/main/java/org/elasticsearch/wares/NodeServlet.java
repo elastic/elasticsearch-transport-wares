@@ -23,7 +23,6 @@ import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.http.netty.NettyHttpServerTransport;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
-import org.elasticsearch.node.internal.InternalNode;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestRequest;
 
@@ -60,7 +59,7 @@ public class NodeServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         final Object nodeAttribute = getServletContext().getAttribute(NODE_KEY);
-        if (nodeAttribute == null || !(nodeAttribute instanceof InternalNode)) {
+        if (nodeAttribute == null) {
             if (nodeAttribute != null) {
                 getServletContext().log(
                         "Warning: overwriting attribute with key \"" + NODE_KEY + "\" and type \""
@@ -112,9 +111,9 @@ public class NodeServlet extends HttpServlet {
             getServletContext().setAttribute(NODE_KEY, node);
         } else {
             getServletContext().log("Using pre-initialized elasticsearch Node '" + getServletName() + "'");
-            this.node = (InternalNode) nodeAttribute;
+            this.node = (Node) nodeAttribute;
         }
-        restController = ((InternalNode) node).injector().getInstance(RestController.class);        
+        restController = ((Node) node).injector().getInstance(RestController.class);        
         detailedErrorsEnabled = this.node.settings().getAsBoolean(NettyHttpServerTransport.SETTING_HTTP_DETAILED_ERRORS_ENABLED, true);
     }
 
