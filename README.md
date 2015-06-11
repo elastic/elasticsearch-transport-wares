@@ -15,7 +15,8 @@ but instead use the jar file in addition to elasticsearch itself in your web app
 | elasticsearch | Wares Transport Plugin | Documentation                                                                           |
 |---------------|------------------------|-----------------------------------------------------------------------------------------|
 | master        |  Build from source     | See below                                                                               |
-| es-1.x        |  Build from source     | [2.6.0-SNAPSHOT](https://github.com/elastic/elasticsearch-transport-wares/tree/es-1.x/) |
+| es-1.x        |  Build from source     | [2.7.0-SNAPSHOT](https://github.com/elastic/elasticsearch-transport-wares/tree/es-1.x/) |
+| es-1.6        |  Build from source     | [2.6.0-SNAPSHOT](https://github.com/elastic/elasticsearch-transport-wares/tree/es-1.6/) |
 | es-1.5        |     2.5.0              | [2.5.0](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.5.0/) |
 | es-1.4        |     2.4.1              | [2.4.1](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.4.1/)          |
 | es-1.3        |     2.3.0              | [2.3.0](https://github.com/elastic/elasticsearch-transport-wares/tree/v2.3.0/)          |
