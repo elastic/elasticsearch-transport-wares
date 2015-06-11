@@ -82,11 +82,6 @@ public class ServletRestRequest extends RestRequest {
     }
 
     @Override
-    public boolean contentUnsafe() {
-        return false;
-    }
-
-    @Override
     public BytesReference content() {
         return new BytesArray(content);
     }
