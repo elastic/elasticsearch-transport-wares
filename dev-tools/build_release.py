@@ -63,7 +63,7 @@ Once it's done it will print all the remaining steps.
     (see https://github.com/settings/applications#personal-access-tokens) - Optional: default to no authentication
     - SMTP_HOST - Optional: default to localhost
     - MAIL_SENDER - Optional: default to 'david@pilato.fr': must be authorized to send emails to elasticsearch mailing list
-    - MAIL_TO - Optional: default to 'elasticsearch@googlegroups.com'
+    - MAIL_TO - Optional: default to 'discuss+announcements@elastic.co'
 """
 env = os.environ
 
@@ -399,7 +399,7 @@ def get_github_repository(reponame,
 def check_opened_issues(version, repository, reponame):
     opened_issues = [i for i in repository.iter_issues(state='open', labels='%s' % version)]
     if len(opened_issues)>0:
-        raise NameError('Some issues [%s] are still opened. Check https://github.com/elasticsearch/%s/issues?labels=%s&state=open'
+        raise NameError('Some issues [%s] are still opened. Check https://github.com/elastic/%s/issues?labels=%s&state=open'
                         % (len(opened_issues), reponame, version))
 
 # List issues from github: can be done anonymously if you don't
@@ -466,8 +466,7 @@ Release Notes - %(artifact_id)s - Version %(release_version)s
 %(issues_new)s
 %(issues_doc)s
 
-Issues, Pull requests, Feature requests are warmly welcome on %(artifact_id)s project repository: %(project_url)s
-For questions or comments around this plugin, feel free to use elasticsearch mailing list: https://groups.google.com/forum/#!forum/elasticsearch
+For questions or comments around this plugin, feel free to use elasticsearch mailing list: https://discuss.elastic.co/c/elasticsearch
 
 Enjoy,
 
@@ -499,14 +498,12 @@ Enjoy,
 %(issues_new)s
 %(issues_doc)s
 
-<p>Issues, Pull requests, Feature requests are warmly welcome on
-<a href='%(project_url)s'>%(artifact_id)s</a> project repository!</p>
 <p>For questions or comments around this plugin, feel free to use elasticsearch
-<a href='https://groups.google.com/forum/#!forum/elasticsearch'>mailing list</a>!</p>
+<a href='https://discuss.elastic.co/c/elasticsearch'>mailing list</a>!</p>
 
 <p>Enjoy,</p>
 
-<p>- The <a href="http://www.elasticsearch.com/">Elasticsearch team</a></p>
+<p>- The <a href="http://www.elastic.co/">Elastic team</a></p>
 </body></html>
 """ % {'release_version': release_version,
        'artifact_id': artifact_id,
@@ -535,7 +532,7 @@ def send_email(msg,
                dry_run=True,
                mail=True,
                sender=env.get('MAIL_SENDER'),
-               to=env.get('MAIL_TO', 'elasticsearch@googlegroups.com'),
+               to=env.get('MAIL_TO', 'discuss+announcements@elastic.co'),
                smtp_server=env.get('SMTP_SERVER', 'localhost')):
     msg['From'] = 'Elasticsearch Team <%s>' % sender
     msg['To'] = 'Elasticsearch Mailing List <%s>' % to
@@ -624,7 +621,7 @@ if __name__ == '__main__':
         if mail:
             check_email_settings()
             print('An email to %s will be sent after the release'
-                  % env.get('MAIL_TO', 'elasticsearch@googlegroups.com'))
+                  % env.get('MAIL_TO', 'discuss+announcements@elastic.co'))
         input('Press Enter to continue...')
 
     check_github_credentials()
