@@ -640,9 +640,9 @@ if __name__ == '__main__':
     try:
         elasticsearch_version = find_from_pom('elasticsearch.version')
     except RuntimeError:
-        # With projects using elasticsearch-parent project, we need to consider elasticsearch version
-        # to be after <artifactId>elasticsearch-parent</artifactId>
-        elasticsearch_version = find_from_pom('version', '<artifactId>elasticsearch-parent</artifactId>')
+        # With projects using elasticsearch-plugin project, we need to consider elasticsearch version
+        # to be after <artifactId>elasticsearch-plugin</artifactId>
+        elasticsearch_version = find_from_pom('version', '<artifactId>elasticsearch-plugin</artifactId>')
 
     print('  Artifact Id: [%s]' % artifact_id)
     print('  Release version: [%s]' % release_version)
