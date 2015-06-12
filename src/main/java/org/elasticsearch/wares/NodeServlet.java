@@ -19,7 +19,7 @@
 
 package org.elasticsearch.wares;
 
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.http.netty.NettyHttpServerTransport;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
@@ -66,7 +66,7 @@ public class NodeServlet extends HttpServlet {
                                 + nodeAttribute.getClass().getName() + "\".");
             }
             getServletContext().log("Initializing elasticsearch Node '" + getServletName() + "'");
-            ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
+            Settings.Builder settings = Settings.settingsBuilder();
     
             InputStream resourceAsStream = getServletContext().getResourceAsStream("/WEB-INF/elasticsearch.json");
             if (resourceAsStream != null) {

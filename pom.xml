@@ -37,6 +37,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+        </dependency>
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>

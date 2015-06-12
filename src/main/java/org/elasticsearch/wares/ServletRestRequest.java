@@ -19,9 +19,9 @@
 
 package org.elasticsearch.wares;
 
+import com.google.common.collect.ImmutableList;
 import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.bytes.BytesReference;
-import org.elasticsearch.common.collect.ImmutableList;
 import org.elasticsearch.common.io.Streams;
 import org.elasticsearch.common.io.stream.BytesStreamOutput;
 import org.elasticsearch.rest.RestRequest;
