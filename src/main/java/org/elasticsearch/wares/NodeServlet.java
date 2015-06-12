@@ -60,6 +60,7 @@ public class NodeServlet extends HttpServlet {
     public void init() throws ServletException {
         final Object nodeAttribute = getServletContext().getAttribute(NODE_KEY);
         if (nodeAttribute == null) {
+            // TODO check this. It does not make sense. If nodeAttribute == null it can't be != null
             if (nodeAttribute != null) {
                 getServletContext().log(
                         "Warning: overwriting attribute with key \"" + NODE_KEY + "\" and type \""
@@ -113,7 +114,7 @@ public class NodeServlet extends HttpServlet {
             getServletContext().log("Using pre-initialized elasticsearch Node '" + getServletName() + "'");
             this.node = (Node) nodeAttribute;
         }
-        restController = ((Node) node).injector().getInstance(RestController.class);        
+        restController = node.injector().getInstance(RestController.class);
         detailedErrorsEnabled = this.node.settings().getAsBoolean(NettyHttpServerTransport.SETTING_HTTP_DETAILED_ERRORS_ENABLED, true);
     }
 
